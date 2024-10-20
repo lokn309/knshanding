@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: knsharding
+  datasource:
+    url: jdbc:mysql://localhost:3306/ds0?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8
+    username: root
+    password: lokn
+    driver-class-name: com.mysql.cj.jdbc.Driver
