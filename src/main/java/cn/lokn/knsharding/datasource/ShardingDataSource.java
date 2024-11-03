@@ -1,5 +1,8 @@
-package cn.lokn.knsharding;
+package cn.lokn.knsharding.datasource;
 
+import cn.lokn.knsharding.engine.ShardingContext;
+import cn.lokn.knsharding.config.ShardingProperties;
+import cn.lokn.knsharding.engine.ShardingResult;
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 

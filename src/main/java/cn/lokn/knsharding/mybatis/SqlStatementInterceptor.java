@@ -1,6 +1,8 @@
-package cn.lokn.knsharding;
+package cn.lokn.knsharding.mybatis;
 
-import cn.lokn.knsharding.demo.User;
+import cn.lokn.knsharding.demo.model.User;
+import cn.lokn.knsharding.engine.ShardingContext;
+import cn.lokn.knsharding.engine.ShardingResult;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.plugin.Interceptor;

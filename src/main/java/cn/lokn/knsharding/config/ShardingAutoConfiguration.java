@@ -1,6 +1,6 @@
-package cn.lokn.knsharding;
+package cn.lokn.knsharding.config;
 
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import cn.lokn.knsharding.datasource.ShardingDataSource;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

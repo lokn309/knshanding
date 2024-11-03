@@ -1,20 +1,20 @@
-package cn.lokn.knsharding;
+package cn.lokn.knsharding.demo;
 
-import cn.lokn.knsharding.demo.User;
-import cn.lokn.knsharding.demo.UserMapper;
-import org.apache.ibatis.annotations.Mapper;
+import cn.lokn.knsharding.config.ShardingAutoConfiguration;
+import cn.lokn.knsharding.mybatis.ShardingMapperFactoryBean;
+import cn.lokn.knsharding.demo.mapper.UserMapper;
+import cn.lokn.knsharding.demo.model.User;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
 @Import(ShardingAutoConfiguration.class)
-@MapperScan(value = "cn.lokn.knsharding.demo",
+@MapperScan(value = "cn.lokn.knsharding.demo.mapper",
         factoryBean = ShardingMapperFactoryBean.class)
 public class KnshardingApplication {
 
@@ -53,9 +53,9 @@ public class KnshardingApplication {
         user = userMapper.findById(id);
         System.out.println(" ===> find = " + user);
 
-//            System.out.println(" ===> 5. test delete...");
-//            int delete = userMapper.delete(id);
-//            System.out.println(" ===> delete = " + delete);
+        System.out.println(" ===> 5. test delete...");
+        int delete = userMapper.delete(id);
+        System.out.println(" ===> delete = " + delete);
     }
 
 }

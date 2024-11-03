@@ -1,5 +1,6 @@
-package cn.lokn.knsharding.demo;
+package cn.lokn.knsharding.demo.mapper;
 
+import cn.lokn.knsharding.demo.model.User;
 import org.apache.ibatis.annotations.*;
 
 @Mapper

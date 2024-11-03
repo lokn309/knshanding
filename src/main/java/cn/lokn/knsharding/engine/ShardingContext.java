@@ -1,4 +1,4 @@
-package cn.lokn.knsharding;
+package cn.lokn.knsharding.engine;
 
 /**
  * @description: Sharding context.

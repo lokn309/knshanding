@@ -1,4 +1,4 @@
-package cn.lokn.knsharding.demo;
+package cn.lokn.knsharding.demo.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

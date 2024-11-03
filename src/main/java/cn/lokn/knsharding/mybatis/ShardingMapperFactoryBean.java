@@ -1,13 +1,13 @@
-package cn.lokn.knsharding;
+package cn.lokn.knsharding.mybatis;
 
-import cn.lokn.knsharding.demo.User;
-import org.apache.ibatis.executor.statement.StatementHandler;
+import cn.lokn.knsharding.demo.model.User;
+import cn.lokn.knsharding.engine.ShardingContext;
+import cn.lokn.knsharding.engine.ShardingResult;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.mapper.MapperFactoryBean;
-import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Proxy;
 

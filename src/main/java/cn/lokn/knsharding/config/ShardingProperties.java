@@ -1,4 +1,4 @@
-package cn.lokn.knsharding;
+package cn.lokn.knsharding.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
