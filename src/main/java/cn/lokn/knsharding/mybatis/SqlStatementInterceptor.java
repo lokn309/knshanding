@@ -18,7 +18,6 @@ import java.sql.Connection;
  * @author: lokn
  * @date: 2024/10/21 21:58
  */
-@Component
 @Intercepts(@Signature(
         type = StatementHandler.class,
         method = "prepare",
@@ -30,14 +29,9 @@ public class SqlStatementInterceptor implements Interceptor {
     public Object intercept(Invocation invocation) throws Throwable {
         StatementHandler handler = (StatementHandler) invocation.getTarget();
         BoundSql boundSql = handler.getBoundSql();
-        System.out.println(" ===> sql statement: " + boundSql.getSql());
+        System.out.println(" ===> SqlStatementInterceptor: " + boundSql.getSql());
         Object parameterObject = boundSql.getParameterObject();
-        if (parameterObject instanceof User user) {
-            ShardingContext.set(new ShardingResult(user.getId() % 2 == 0 ? "ds0" : "ds1"));
-        } else if (parameterObject instanceof Integer id) {
-            ShardingContext.set(new ShardingResult(id % 2 == 0 ? "ds0" : "ds1"));
-        }
-        System.out.println(" ===> sql parameters: " + boundSql.getParameterObject());
+        System.out.println(" ===> SqlStatementInterceptor: " + boundSql.getParameterObject());
         // todo 修改sql， user -> user1
         return invocation.proceed();
     }
