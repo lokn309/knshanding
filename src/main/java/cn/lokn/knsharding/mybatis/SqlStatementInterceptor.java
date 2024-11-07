@@ -9,8 +9,11 @@ import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.plugin.Intercepts;
 import org.apache.ibatis.plugin.Invocation;
 import org.apache.ibatis.plugin.Signature;
+import org.springframework.objenesis.instantiator.util.UnsafeUtils;
 import org.springframework.stereotype.Component;
+import sun.misc.Unsafe;
 
+import java.lang.reflect.Field;
 import java.sql.Connection;
 
 /**
@@ -27,12 +30,27 @@ import java.sql.Connection;
 public class SqlStatementInterceptor implements Interceptor {
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
-        StatementHandler handler = (StatementHandler) invocation.getTarget();
-        BoundSql boundSql = handler.getBoundSql();
-        System.out.println(" ===> SqlStatementInterceptor: " + boundSql.getSql());
-        Object parameterObject = boundSql.getParameterObject();
-        System.out.println(" ===> SqlStatementInterceptor: " + boundSql.getParameterObject());
-        // todo 修改sql， user -> user1
+        ShardingResult result = ShardingContext.get();
+        if (result != null) {
+            StatementHandler handler = (StatementHandler) invocation.getTarget();
+            BoundSql boundSql = handler.getBoundSql();
+            String sql = boundSql.getSql();
+            System.out.println(" ===> SqlStatementInterceptor: " + sql);
+            String targetSqlStatement = result.getTargetSqlStatement();
+            // 这里的if条件是优化，可以加，也可以不加
+            if (!sql.equalsIgnoreCase(targetSqlStatement)) {
+                replaceSql(boundSql, targetSqlStatement);
+            }
+        }
         return invocation.proceed();
+    }
+
+    private static void replaceSql(BoundSql boundSql, String sql) throws NoSuchFieldException {
+        // 1、反射拿到sql的Field
+        Field field = boundSql.getClass().getDeclaredField("sql");
+        Unsafe unsafe = UnsafeUtils.getUnsafe();
+        // 直接修改内存
+        long fieldOffset = unsafe.objectFieldOffset(field);
+        unsafe.putObject(boundSql, fieldOffset, sql);
     }
 }

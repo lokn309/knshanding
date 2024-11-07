@@ -53,9 +53,9 @@ public class KnshardingApplication {
         user = userMapper.findById(id);
         System.out.println(" ===> find = " + user);
 
-        System.out.println(" ===> 5. test delete...");
-        int delete = userMapper.delete(id);
-        System.out.println(" ===> delete = " + delete);
+//        System.out.println(" ===> 5. test delete...");
+//        int delete = userMapper.delete(id);
+//        System.out.println(" ===> delete = " + delete);
     }
 
 }
