@@ -46,6 +46,7 @@ public class SqlStatementInterceptor implements Interceptor {
     }
 
     private static void replaceSql(BoundSql boundSql, String sql) throws NoSuchFieldException {
+        // 由于 boundSql 中的 sql 是final修饰的，所以不能直接修改，只能通过Unsafe在运行期时进行修改。
         // 1、反射拿到sql的Field
         Field field = boundSql.getClass().getDeclaredField("sql");
         Unsafe unsafe = UnsafeUtils.getUnsafe();

@@ -20,3 +20,11 @@ spring:
         tableStrategy:
           shardingColumn: id
           algorithmExpression: user${id % 3}
+      t_order:
+          actualDataNodes: ds0.t_order0,ds0.t_order1,ds1.t_order0,ds1.t_order1
+          databaseStrategy:
+            shardingColumn: uid
+            algorithmExpression: ds${uid % 2}
+          tableStrategy:
+            shardingColumn: id
+            algorithmExpression: t_order${id % 2}
